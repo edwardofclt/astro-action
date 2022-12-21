@@ -45,5 +45,5 @@ jobs:
 
       - run: |
           docker build --build-arg ASTRO_VERSION=${{ fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
-          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
+          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
           docker push
