@@ -25,13 +25,11 @@ inputs:
 #     description: 'The time we greeted you'
 
 runs:
-  using: 'docker'
-  image: Dockerfile
-  env:
-    ASTRONOMER_KEY_ID: ${{ inputs.astro_key_id }}
-    ASTRONOMER_KEY_SECRET: ${{ inputs.astro_key_secret }}
-    VERSION: ${{ inputs.version }}
-    MOUNTPOINT: ${{ inputs.mountpoint }}
-  args:
-    - ${{ inputs.command }}
-  
+  using: composite
+  steps:
+    - run: |
+        docker run -v ${{ input.mountpoint }}:/workspace \
+          -e ASTRONOMER_KEY_ID=${{ inputs.astro_key_id }} \
+          -e ASTRONOMER_KEY_SECRET=${{ inputs.astro_key_secret }} \
+          edwardofclt/astro-action:${{ inputs.version }} ${{ inputs.command }}
+      shell: bash
