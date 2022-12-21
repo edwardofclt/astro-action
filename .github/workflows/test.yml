@@ -7,7 +7,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: edwardofclt/astro-action@561b325d58bb70bd021ac57c40a6531f82bce413
+      - uses: ../action.yml
         with:
           astro_key_id: asdf
           astro_key_secret: asdf
+          github_secret: ${{ secrets.GITHUB_TOKEN }}
