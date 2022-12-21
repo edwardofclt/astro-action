@@ -30,6 +30,8 @@ runs:
   env:
     ASTRONOMER_KEY_ID: ${{ inputs.astro_key_id }}
     ASTRONOMER_KEY_SECRET: ${{ inputs.astro_key_secret }}
+    VERSION: ${{ inputs.version }}
+    MOUNTPOINT: ${{ inputs.mountpoint }}
   args:
     - ${{ inputs.command }}
   
