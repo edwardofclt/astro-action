@@ -27,6 +27,8 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: echo ${{ inputs.github_secret }} | docker login -u ${{ github.actor }} --password-stdin
+      shell: bash
     - run: |
         docker run -v ${{ inputs.mountpoint }}:/workspace \
           -e ASTRONOMER_KEY_ID=${{ inputs.astro_key_id }} \
