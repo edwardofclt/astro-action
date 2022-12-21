@@ -48,6 +48,6 @@ jobs:
           echo 'version=${{ fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
 
       - run: |
-          docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
+          docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ./.github/workflows/Dockerfile
           docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.astro_version.outputs.version }}
           docker push -a ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}
