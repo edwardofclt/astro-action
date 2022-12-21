@@ -4,5 +4,5 @@ ARG ASTRO_VERSION
 USER root
 RUN apt-get update && apt-get install -y curl
 RUN curl -sSL install.astronomer.io | bash -s -- ${ASTRO_VERSION}
-COPY ./entrypoint.sh /usr/local/bin/entrypoint
+COPY ./.github/workflows/entrypoint.sh /usr/local/bin/entrypoint
 WORKDIR /workspace
