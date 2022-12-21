@@ -1,0 +1,13 @@
+name: Test the Action
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: edwardofclt/astro-action@latest
+        with:
+          astro_key_id: asdf
+          astro_key_secret: asdf
