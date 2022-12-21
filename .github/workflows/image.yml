@@ -47,6 +47,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
-          docker build -t ${{ env.REGISTRY }}/edwardofclt/${{ IMAGE_NAME }}:latest .
-          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
+          docker build -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
+          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
           docker push
