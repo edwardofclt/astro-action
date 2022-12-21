@@ -50,4 +50,4 @@ jobs:
       - run: |
           docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
           docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.astro_version.outputs.version }}
-          docker push ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}
+          docker push -a ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}
