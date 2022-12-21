@@ -3,5 +3,5 @@ ARG MOUNTPOINT
 ARG ASTRONOMER_KEY_ID
 ARG ASTRONOMER_KEY_SECRET
 
-FROM ghcr.io/edwardofclt/astro-action:${VERSION}
-COPY ${MOUNTPOINT} .
+FROM ghcr.io/edwardofclt/astro-action:$VERSION
+COPY $MOUNTPOINT .
