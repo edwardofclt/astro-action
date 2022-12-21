@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: edwardofclt/astro-action@6d62e86852a6eea3176191126300a3f97f55ae8b
+      - uses: edwardofclt/astro-action@05c8d50aedde321c3e328679503e44c5ec0a0e4e
         with:
           astro_key_id: asdf
           astro_key_secret: asdf
