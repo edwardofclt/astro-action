@@ -44,6 +44,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: |
-          docker build --build-arg ASTRO_VERSION=${{ fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
-          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
+          echo 'ASTRO_VERSION=${{ fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
+
+      - run: |
+          docker build --build-arg ASTRO_VERSION=${{ env.ASTRO_VERSION }} -t ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest .
+          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/edwardofclt/${{ env.IMAGE_NAME }}:${{ env.ASTRO_VERSION }}
           docker push
