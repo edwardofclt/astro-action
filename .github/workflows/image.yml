@@ -1,0 +1,52 @@
+name: Release Version
+on:
+  schedule:
+    - cron: 0 0 * * MON
+  workflow_dispatch: 
+
+permissions:
+  packages: write
+  contents: read
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: octokit/graphql-action@v2.x
+        id: get_latest_release
+        with:
+          query: |
+            query release($owner:String!,$repo:String!) {
+              repository(owner:$owner,name:$repo) {
+                releases(first:1) {
+                  nodes {
+                    name
+                    createdAt
+                    tagName
+                    description
+                  }
+                }
+              }
+            }
+          owner: astronomer
+          repo: astro-cli
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: |
+          docker build -t ${{ env.REGISTRY }}/edwardofclt/${{ IMAGE_NAME }}:latest .
+          docker image tag ${{ env.REGISTRY }}/edwardofclt/${{ IMAGE_NAME }}:${{ steps.get_latest_release.outputs.data }}
+          docker push
