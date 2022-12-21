@@ -28,7 +28,7 @@ runs:
   using: composite
   steps:
     - run: |
-        docker run -v ${{ input.mountpoint }}:/workspace \
+        docker run -v ${{ inputs.mountpoint }}:/workspace \
           -e ASTRONOMER_KEY_ID=${{ inputs.astro_key_id }} \
           -e ASTRONOMER_KEY_SECRET=${{ inputs.astro_key_secret }} \
           edwardofclt/astro-action:${{ inputs.version }} ${{ inputs.command }}
