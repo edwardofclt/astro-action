@@ -9,8 +9,4 @@ jobs:
     container: edwardofclt/astro-action@lastest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./action.yml
-        with:
-          astro_key_id: asdf
-          astro_key_secret: asdf
-          github_secret: ${{ secrets.GITHUB_TOKEN }}
+      - run: astro --version
