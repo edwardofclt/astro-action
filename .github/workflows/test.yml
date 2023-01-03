@@ -7,8 +7,8 @@ on:
         default: latest
         description: What version of the container should run?
 
-permissions:
-  packages: read
+# permissions:
+#   packages: read
 
 jobs:
   test:
