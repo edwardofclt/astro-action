@@ -34,7 +34,7 @@ jobs:
 
       - uses: octokit/graphql-action@v2.x
         id: get_latest_release
-        if: ${{ input.image_version }} == ""
+        if: ${{ inputs.image_version }} == ""
         with:
           query: |
             query release($owner:String!,$repo:String!) {
@@ -53,7 +53,7 @@ jobs:
 
       - id: astro_version
         run: |
-          echo 'version=${{ input.image_version || fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
+          echo 'version=${{ inputs.image_version || fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
 
       - run: |
           docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -f ./.github/workflows/Dockerfile .
