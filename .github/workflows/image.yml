@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: 0 0 * * MON
   workflow_dispatch: 
+    inputs:
+      image_version:
+        required: true
+        description: What version of the container should be built?
 
 permissions:
   packages: write
@@ -27,6 +31,7 @@ jobs:
 
       - uses: octokit/graphql-action@v2.x
         id: get_latest_release
+        if: ${{ input.image_version }} == ""
         with:
           query: |
             query release($owner:String!,$repo:String!) {
@@ -45,7 +50,7 @@ jobs:
 
       - id: astro_version
         run: |
-          echo 'version=${{ fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
+          echo 'version=${{ input.image_version || fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
 
       - run: |
           docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -f ./.github/workflows/Dockerfile .

@@ -2,6 +2,10 @@ name: Test the Action
 
 on:
   workflow_dispatch: 
+    inputs:
+      image_version:
+        default: latest
+        description: What version of the container should run?
 
 permissions:
   packages: read
