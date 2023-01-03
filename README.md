@@ -1,34 +1,19 @@
 # astro-action
 
-This action makes it easy to run the astro CLI tool for deploying your DAGs.
+This bundles up the astro CLI into a nifty container
 
-## Inputs
+```yaml
+name: Run astro
 
-### `version`
+on:
+  push:
+    branches: [main]
 
-The version of the image to pull. Default: `latest`
-
-### `command` 
-
-**Required** The command to run inside of `astro`
-
-### `mountpoint` 
-
-**Required** Where are your project files? Default: `.`
-
-### `astro_key_id`
-
-**Required** API Key for Astronomer deployment
-
-### `astro_key_secret`
-
-**Required** API Secret Key for Astronomer deployment
-
-## Example Usage
-
-```
-  - uses: edwardofclt/astro-action@latest
-    with:
-      astro_key_id: asdf123
-      astro_key_secret: asdf123asdf123
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/edwardofclt/astro-action:latest
+    steps:
+      - run: astro version
 ```
