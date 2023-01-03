@@ -6,7 +6,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: edwardofclt/astro-action@latest
+    container: 
+      image: edwardofclt/astro-action@latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
     steps:
       - uses: actions/checkout@v3
       - run: astro --version
