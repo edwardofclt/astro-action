@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: edwardofclt/astro-action@lastest
+    container: edwardofclt/astro-action@latest
     steps:
       - uses: actions/checkout@v3
       - run: astro --version
