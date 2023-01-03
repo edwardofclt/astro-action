@@ -3,6 +3,9 @@ name: Test the Action
 on:
   workflow_dispatch: 
 
+permissions:
+  packages: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
