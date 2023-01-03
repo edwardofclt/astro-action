@@ -16,4 +16,4 @@ jobs:
       #   password: ${{ secrets.github_token }}
     steps:
       - uses: actions/checkout@v3
-      - run: astro --version
+      - run: astro version
