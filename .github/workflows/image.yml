@@ -56,6 +56,8 @@ jobs:
           echo 'version=${{ inputs.image_version || fromJSON(steps.get_latest_release.outputs.data).repository.releases.nodes[0].name }}' >> $GITHUB_OUTPUT
 
       - run: |
-          docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest -f ./.github/workflows/Dockerfile .
-          docker image tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.astro_version.outputs.version }}
+          docker build --build-arg ASTRO_VERSION=${{ steps.astro_version.outputs.version }} -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.astro_version.outputs.version }} -f ./.github/workflows/Dockerfile .
+          if [ '${{ inputs.image_version }}' == '' ]; then 
+            docker image tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.astro_version.outputs.version }} ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          fi
           docker push -a ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
