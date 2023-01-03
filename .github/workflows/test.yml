@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/edwardofclt/astro-action:latest
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - uses: actions/checkout@v3
       - run: astro version
+      - run: docker ps
