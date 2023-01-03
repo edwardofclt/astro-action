@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: 
-      image: ghcr.io/edwardofclt/astro-action@latest
+      image: ghcr.io/edwardofclt/astro-action
       # credentials:
       #   username: ${{ github.actor }}
       #   password: ${{ secrets.github_token }}
