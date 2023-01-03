@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: edwardofclt/astro-action@latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
+      # credentials:
+      #   username: ${{ github.actor }}
+      #   password: ${{ secrets.github_token }}
     steps:
       - uses: actions/checkout@v3
       - run: astro --version
